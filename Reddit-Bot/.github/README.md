@@ -2,7 +2,7 @@
 ## BTL_Python_Nhom9
 
 ##### There are no more releases planned.
-###### I might work on it sporadically  
+###### We might work on it sporadically  
 
 #### Tested in python 3, 3.5, 3.6
 ---
