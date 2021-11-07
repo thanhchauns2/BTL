@@ -8,6 +8,7 @@ import logmaker
 import main
 import botinfo
 import downvote
+import locationinfo
 
 
 class CommandLineInterface:
@@ -42,6 +43,7 @@ class CommandLineInterface:
         print("comment reply")
         print("download pictures")
         print("check nsfw")
+        print("location info")
         print("find mentions")
         print("downvote remover")
         print("add -x flag to add a repetition loop with x minutes pause")
@@ -76,6 +78,8 @@ class CommandLineInterface:
                         main.check_nsfw(main.subreddit)
                     if "download pictures" in command or "all" in command:
                         main.download(main.subreddit)
+                    if "location" in command or "all" in command:
+                        locationinfo.main(main.reddit)
                     if "downvote remover" in command or "all" in command:
                         downvote.downvoted_remover(main.reddit)
                     if "response add" in command:
