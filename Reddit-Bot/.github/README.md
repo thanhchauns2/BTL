@@ -40,15 +40,7 @@ To get mutliple subreddit use the cli change subreddit and for the new subreddit
 ---
 #### Versions
 
-
-Number | Date | Download Link
----|---|---
-Version 4.0 | April 29th, 2018 | [Link](https://github.com/coolaspie/useful_bot/releases/download/v4.0/useful_bot.zip)
-Version 3.5 | April 21th, 2018 | [Link](https://github.com/coolaspie/useful_bot/releases/download/v3.4/useful_bot-master.zip)
-Version 3 | April 15th, 2018 | [Link](https://github.com/coolaspie/useful_bot/releases/download/V3/useful_bot-master.zip)
-Version 2 | April 13th, 2018 | [Link](https://github.com/coolaspie/useful_bot/releases/download/v2.0/useful_bot.zip)
-Version 1 | April 5th, 2018 | [Link](https://github.com/coolaspie/useful_bot/releases/tag/v1.0)
-
+No further versions available.
 
 #### Currently:
 * Replies to posts
