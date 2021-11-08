@@ -230,7 +230,17 @@ def reply_format(unformatted, author):
     formatted = unformatted + botinfo.footer
     return formatted
 
-
+def hot_post(sub_reddit):
+    print("Nhap tu khoa muon tim kiem:", end=' ')
+    keywork = input()
+    logger.info(f"Start Search Hot Post \n- Subreddit: {sub_reddit}\n- Keywork: {keywork}")
+    rank = 1
+    for post in reddit.subreddit(f"{sub_reddit}").search(keywork, "hot", limit = 20):
+        print(f"\nTOP {rank}\n- Title: {post.title}\n- Link: https://reddit.com{post.permalink}")
+        rank += 1
+    print()
+    logger.info("Finished Search Hot Post")
+    
 def message_check(additional):  # Checks to see if there are messages
     logger.info("Starting Messages")
     marked = []
