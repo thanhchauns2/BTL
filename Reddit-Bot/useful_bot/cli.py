@@ -82,6 +82,8 @@ class CommandLineInterface:
                         locationinfo.main(main.reddit)
                     if "downvote remover" in command or "all" in command:
                         downvote.downvoted_remover(main.reddit)
+                    if "hot post" in command or "all" in command:
+                        main.hot_post(main.subreddit)
                     if "response add" in command:
                         self.response_add()
                     if "response delete" in command:
