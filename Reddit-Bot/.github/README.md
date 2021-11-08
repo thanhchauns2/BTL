@@ -19,7 +19,7 @@ Fully tested releases are [here](https://github.com/coolaspie/useful_bot/release
 
 ``` 
 pip install praw  
-git clone https://github.com/coolaspie/useful_bot.git  
+git clone https://github.com/thanhchauns2/BTL/Reddit-Bot.git  
 ```
 
 To run:  
