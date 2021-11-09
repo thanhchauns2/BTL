@@ -147,6 +147,33 @@ def post_reply(subreddit):# ham thuc hien chuc nang
     dh.insert("Posts", toadd)  # Adds all the posts that were replied to
     logger.info("Finished Posts")
 
+#auto upvote downvote
+def autoupvotedownvote(subreddit):
+    logger.info("Starting bot auto upvote or downvote")
+    upvote_or_downvote = input('Would you like to (U)pvote or (D)ownvote the target? (U|D): ')
+    total_posts = int(input("Total number of posts that you want to make: "))
+    upvote = ["u","U"]
+    downvote = ["d","D"]
+  
+    if upvote_or_downvote in downvote:
+        print('Begining to downvote.  The link to the comment will be printed when a comment is downvoted:\n')
+        already_done = set()
+        for submission in subreddit.hot(limit = total_posts):
+            if submission.id not in already_done:
+                submission.downvote()
+                already_done.add(submission.id)
+                print("reddit.com"+ submission.permalink)
+        logger.info("Finished auto downvote")
+    if upvote_or_downvote in upvote:
+        print('Begining to upvote.  The link to the comment will be printed when a comment is upvoted:\n')
+        already_done = set()
+        for submission in subreddit.hot(limit = total_posts):
+            if submission.id not in already_done:
+                submission.upvote()
+                already_done.add(submission.id)
+                print("reddit.com"+submission.permalink)
+        logger.info("Finished auto upvote")
+        
 def download(subreddit):
     logger.info("Insert Keyword")
     key = input()
