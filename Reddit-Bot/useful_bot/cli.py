@@ -39,6 +39,7 @@ class CommandLineInterface:
         print()
         print("Commands:")
         print("message check")
+        print("auto upvote or downvote")
         print("post reply")
         print("comment reply")
         print("download pictures")
@@ -70,6 +71,8 @@ class CommandLineInterface:
                         main.message_check(main.additional_responses)
                     if "post reply" in command or "all" in command:
                         main.post_reply(main.subreddit)
+                    if "auto upvote or downvote" in command or "all" in command:
+                        main.autoupvotedownvote(main.subreddit)
                     if "comment reply" in command or "all" in command:
                         main.comment_reply(main.subreddit)
                     if "find mentions" in command or "all" in command:
