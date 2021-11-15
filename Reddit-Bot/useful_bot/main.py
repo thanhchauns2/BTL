@@ -162,7 +162,7 @@ def autoupvotedownvote(subreddit):
             if submission.id not in already_done:
                 submission.downvote()
                 already_done.add(submission.id)
-                print("reddit.com"+ submission.permalink)
+                print("Link: https://reddit.com"+ submission.permalink)
         logger.info("Finished auto downvote")
     if upvote_or_downvote in upvote:
         print('Begining to upvote.  The link to the comment will be printed when a comment is upvoted:\n')
@@ -171,7 +171,7 @@ def autoupvotedownvote(subreddit):
             if submission.id not in already_done:
                 submission.upvote()
                 already_done.add(submission.id)
-                print("reddit.com"+submission.permalink)
+                print("Link: https://reddit.com"+submission.permalink)
         logger.info("Finished auto upvote")
         
 def download(subreddit):
