@@ -264,11 +264,15 @@ def reply_format(unformatted, author):
     return formatted
 
 def hot_post(sub_reddit):
-    print("Nhap tu khoa muon tim kiem:", end=' ')
+    print("Enter keyword:", end=' ')
     keywork = input()
+    print("Enter limit:", end=' ')
+    lim = int(input())
+    print("Enter kind of post: hot, new, top:", end=' ')
+    kind = input()
     logger.info(f"Start Search Hot Post \n- Subreddit: {sub_reddit}\n- Keywork: {keywork}")
     rank = 1
-    for post in reddit.subreddit(f"{sub_reddit}").search(keywork, "hot", limit = 20):
+    for post in reddit.subreddit(f"{sub_reddit}").search(keywork, kind, limit = lim):
         print(f"\nTOP {rank}\n- Title: {post.title}\n- Link: https://reddit.com{post.permalink}")
         rank += 1
     print()
