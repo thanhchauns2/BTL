@@ -44,6 +44,7 @@ class CommandLineInterface:
         print("comment reply")
         print("download pictures")
         print("check nsfw")
+        print("hot post")
         print("location info")
         print("find mentions")
         print("downvote remover")
