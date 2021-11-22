@@ -17,7 +17,9 @@ import datahandler as dh
 import logmaker
 import botinfo
 import downvote
-
+from models.Post import Post
+from models.Comment import Comment
+from models.Blacklist import Blacklist
 
 def stopbot(delete=False):  # Ends the script and deletes log files if no errors occurred
     logger.info("Shutting down")
@@ -121,25 +123,25 @@ def post_reply(subreddit):# ham thuc hien chuc nang
     toadd = []
     for submission in subreddit.hot(
             limit=10):  # Gets submissions from the subreddit. Here it has a limit of 10
-        add = []
         if submission.id not in posts_replied_to:
             for response in post_responses:
                 if (re.search(response[0], submission.title, re.IGNORECASE)) and (
                         submission.author.name not in blacklisted):  # If you wanted to have it search the body change submission.title to sub,
                     try:
-                        add.append(submission.id)
+                        sid = submission.id
                         submission.reply(
                             reply_format(
                                 response[1],
                                 submission.author))
-                        add.append(
+                        stime = (
                             datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
                         logger.debug(
                             "Bot replying to : {0}".format(
                                 submission.title))
-                        add.append(botinfo.subreddit)
-                        add.append(response[1])
-                        toadd.append(add)
+                        ssubreddit = botinfo.subreddit
+                        sreply = (response[1])
+                        spost = Post(sid,stime,ssubreddit,sreply)
+                        toadd.append(spost)
                         break
                     except Exception as e:
                         logger.warn(e)
@@ -213,15 +215,15 @@ def comment_reply(subreddit):  # Looks through all comments in a post
                 if (response[0] in text.lower()) and (
                         comment.id not in comments_replied_to) and (author.lower() not in blacklisted):
                     try:
-                        add = []
-                        add.append(comment.id)
-                        add.append(
+                        cid = comment.id
+                        ctime = (
                             datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-                        add.append(response[1])
-                        add.append(botinfo.subreddit)
+                        creply = response[1]
+                        csubreddit = botinfo.subreddit
+                        cmt = Comment(cid,ctime,csubreddit,creply)
                         comment.reply(reply_format(response[1], author))
                         logger.debug("Bot replying to {0}".format(text))
-                        toadd.append(add)
+                        toadd.append(cmt)
                     except Exception as e:
                         logger.warn(e)
 
@@ -287,8 +289,10 @@ def message_check(additional):  # Checks to see if there are messages
         name = x.author.name.lower()
         if (("stop" == received_subject) or ("blacklist" ==
                                              received_subject)) and name not in blacklisted:
-            data = [[name, datetime.datetime.now().strftime(
-                '%Y-%m-%d %H:%M:%S'), x.body]]
+            data = []
+            blacklist = Blacklist(name, datetime.datetime.now().strftime(
+                '%Y-%m-%d %H:%M:%S'), x.body)
+            data.append(blacklist)
             logger.info("Blacklisting user: " + x.author.name)
             message_send(x.author.name, "blacklist add")
             dh.insert("Blacklist", data)

@@ -2,6 +2,9 @@
 import sqlite3
 # Internal
 import logmaker
+from models.Post import Post
+from models.Comment import Comment
+from models.Blacklist import Blacklist
 
 connection = sqlite3.connect("data.db")
 cursor = connection.cursor()
@@ -56,7 +59,7 @@ def insert(table, data):  # Creates new rows in the table
             format_str = """ INSERT OR IGNORE INTO {choice} (user, time, reason) VALUES (?, ?, ?)""".format(
                 choice=table)
             try:
-                cursor.execute(format_str, (i[0], i[1], i[2]))
+                cursor.execute(format_str, (i.user, i.time, i.reason))
                 connection.commit()
             except Exception as e:
                 logger.error(e)
@@ -101,7 +104,7 @@ def insert(table, data):  # Creates new rows in the table
             format_str = """ INSERT OR IGNORE INTO {choice} (id, time, subreddit, reply) VALUES (?, ?, ?, ?)""".format(
                 choice=table)
             try:
-                cursor.execute(format_str, (i[0], i[1], i[2], str(i[3])))
+                cursor.execute(format_str, (i.id, i.time, i.subreddit, str(i.reply)))
                 connection.commit()
             except Exception as e:
                 logger.error(e)
