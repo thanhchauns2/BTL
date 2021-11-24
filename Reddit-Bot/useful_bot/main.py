@@ -253,7 +253,6 @@ def check_nsfw(subreddit):
                 add.append("Warned")
             else:
                 add.append('Deleted')
-            add.append(botinfo.subreddit)
             logger.debug(f"Bot replying to {text}")
             toadd.append(add)
     dh.insert("Comments", toadd)
