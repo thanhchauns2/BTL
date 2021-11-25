@@ -213,7 +213,7 @@ def comment_reply(subreddit):  # Looks through all comments in a post
             author = comment.author
             for response in comment_responses:
                 if (response[0] in text.lower()) and (
-                        comment.id not in comments_replied_to) and (author.lower() not in blacklisted):
+                        comment.id not in comments_replied_to) and (author not in blacklisted):
                     try:
                         cid = comment.id
                         ctime = (
@@ -233,7 +233,7 @@ def comment_reply(subreddit):  # Looks through all comments in a post
 def check_nsfw(subreddit): 
     logger.info("Starting to check")
     toadd = []
-    mode = input('Select mode: warn / delete')
+    mode = input('Select mode: warn / report ')
     nsfw = ["sex", "porn", "bdsm", "jav", "bitch", "dick", "cock", "dickhead", "moron", "suck", "sucker", "fucker", "motherfucker", "shit", "ass", "pussy", "fuck"]
     for post in subreddit.hot(limit = 10):
         submission = reddit.submission(post)
@@ -246,16 +246,7 @@ def check_nsfw(subreddit):
             if mode == 'warn':
                 comment.reply("Nsfw found~ I'm a testbot so ignore this OwO")
             else:
-                comment.delete()
-            add = []
-            add.append(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-            if mode == 'warn':
-                add.append("Warned")
-            else:
-                add.append('Deleted')
-            logger.debug(f"Bot replying to {text}")
-            toadd.append(add)
-    dh.insert("Comments", toadd)
+                comment.report('Hate')
     logger.info("Finished Checking")
 # Adds the footer and formats author name if needed
 def reply_format(unformatted, author):
